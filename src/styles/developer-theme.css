@@ -1,0 +1,178 @@
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    opacity: 0.5;
+    filter: blur(15px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Floating elements */
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glowing effect */
+.glow-effect {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%);
+  animation: glow 4s ease-in-out infinite;
+}
+
+/* Terminal cursor effect */
+.terminal-cursor::after {
+  content: '|';
+  animation: pulse 1s infinite;
+  color: #0ea5e9;
+  font-weight: bold;
+}
+
+/* Code highlighting effect */
+.code-highlight {
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  animation: slideInFromLeft 10s linear infinite;
+}
+
+/* Binary background pattern */
+.binary-bg {
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(59, 130, 246, 0.03) 2px,
+      rgba(59, 130, 246, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(139, 92, 246, 0.03) 2px,
+      rgba(139, 92, 246, 0.03) 4px
+    );
+}
+
+/* Syntax highlighting colors */
+.syntax-keyword {
+  color: #c678dd;
+}
+
+.syntax-function {
+  color: #61afef;
+}
+
+.syntax-string {
+  color: #98c379;
+}
+
+.syntax-comment {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.syntax-number {
+  color: #d19a66;
+}
+
+/* Glass morphism effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Neon text effect */
+.neon-text {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor,
+    0 0 20px currentColor;
+}
+
+/* Terminal window style */
+.terminal-window {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.terminal-header {
+  background: linear-gradient(to right, #1e293b, #334155);
+  padding: 8px 12px;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red {
+  background: #ff5f56;
+}
+
+.terminal-dot.yellow {
+  background: #ffbd2e;
+}
+
+.terminal-dot.green {
+  background: #27c93f;
+}

@@ -1,0 +1,88 @@
+{
+  "products": [
+    {
+      "id": "vibecoder-prompt-pack",
+      "polarProductId": "dd0c53a8-edab-436b-8465-97566c962790",
+      "name": "VibeCoder Prompt Pack",
+      "description": "React, Next.js, TypeScript 개발을 위한 완벽한 프롬프트 모음집",
+      "price": 0.00,
+      "currency": "USD",
+      "badge": "베스트셀러",
+      "badgeVariant": "outline",
+      "rating": 4.9,
+      "features": [
+        {
+          "icon": "download",
+          "text": "50+ 프롬프트 템플릿"
+        },
+        {
+          "icon": "zap",
+          "text": "컴포넌트 자동 생성"
+        },
+        {
+          "icon": "users",
+          "text": "커뮤니티 지원"
+        }
+      ],
+      "active": true
+    },
+    {
+      "id": "backend-pro-pack",
+      "polarProductId": "your-backend-product-id-here",
+      "name": "Backend Pro Pack",
+      "description": "Node.js, Express, Database 설계를 위한 전문 프롬프트",
+      "price": 1.50,
+      "currency": "USD",
+      "badge": "인기",
+      "badgeVariant": "secondary",
+      "rating": 4.8,
+      "features": [
+        {
+          "icon": "download",
+          "text": "40+ API 설계 프롬프트"
+        },
+        {
+          "icon": "zap",
+          "text": "DB 스키마 생성"
+        },
+        {
+          "icon": "users",
+          "text": "실시간 업데이트"
+        }
+      ],
+      "active": false
+    },
+    {
+      "id": "ai-integration-pack",
+      "polarProductId": "your-ai-product-id-here",
+      "name": "AI Integration Pack",
+      "description": "ChatGPT, Claude API 연동을 위한 최신 프롬프트 컬렉션",
+      "price": 2.00,
+      "currency": "USD",
+      "badge": "신규",
+      "badgeVariant": "outline",
+      "rating": 5.0,
+      "features": [
+        {
+          "icon": "download",
+          "text": "30+ AI 통합 프롬프트"
+        },
+        {
+          "icon": "zap",
+          "text": "스마트 자동화"
+        },
+        {
+          "icon": "users",
+          "text": "전문가 지원"
+        }
+      ],
+      "active": false
+    }
+  ],
+  "settings": {
+    "showInactiveProducts": false,
+    "defaultCurrency": "USD",
+    "successUrl": "/success",
+    "cancelUrl": "/cancel"
+  }
+}
