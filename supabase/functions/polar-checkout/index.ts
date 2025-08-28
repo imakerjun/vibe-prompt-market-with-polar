@@ -2,7 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 // 직접 하드코딩된 값 (프로덕션에서는 환경 변수 사용 권장)
 // Access Token은 이미 특정 organization에 연결되어 있음
-const POLAR_ACCESS_TOKEN = Deno.env.get('POLAR_ACCESS_TOKEN') || 'polar_oat_zyEiL3pXU3NiRuDtt5GTD3UqauSWNzASC2FP01aWWiL';
+const POLAR_ACCESS_TOKEN = Deno.env.get('POLAR_ACCESS_TOKEN');
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -29,8 +29,8 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    console.log('Using Polar credentials:', { 
-      hasToken: !!POLAR_ACCESS_TOKEN, 
+    console.log('Using Polar credentials:', {
+      hasToken: !!POLAR_ACCESS_TOKEN,
       tokenPrefix: POLAR_ACCESS_TOKEN?.substring(0, 10) + '...'
     });
 
@@ -55,12 +55,12 @@ Deno.serve(async (req: Request) => {
     if (!checkoutResponse.ok) {
       const errorText = await checkoutResponse.text();
       console.error('Polar API error:', errorText);
-      
+
       // If the custom checkout endpoint doesn't exist, fall back to direct URL
       const checkoutUrl = `https://buy.polar.sh/${productId}?success_url=${encodeURIComponent(successUrl || `${req.headers.get('origin')}/success`)}`;
-      
+
       return new Response(
-        JSON.stringify({ 
+        JSON.stringify({
           checkoutUrl,
           method: 'direct',
           note: 'Using direct URL method'
@@ -76,7 +76,7 @@ Deno.serve(async (req: Request) => {
     console.log('Checkout created successfully:', checkoutData);
 
     return new Response(
-      JSON.stringify({ 
+      JSON.stringify({
         checkoutUrl: checkoutData.url || checkoutData.checkout_url,
         checkoutId: checkoutData.id,
         method: 'api'
