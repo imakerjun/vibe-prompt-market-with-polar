@@ -2,18 +2,21 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-// Safe fallback values for when Supabase is not configured
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || "https://placeholder.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || "placeholder-key";
+// Get environment variables safely
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
 // Check if Supabase is properly configured
-const isSupabaseConfigured = SUPABASE_URL !== "https://placeholder.supabase.co" && 
-                             SUPABASE_PUBLISHABLE_KEY !== "placeholder-key" &&
-                             !SUPABASE_URL.includes("<") && 
-                             !SUPABASE_PUBLISHABLE_KEY.includes("<");
+const isSupabaseConfigured = 
+  SUPABASE_URL && 
+  SUPABASE_PUBLISHABLE_KEY && 
+  SUPABASE_URL.startsWith('https://') && 
+  !SUPABASE_URL.includes('<') && 
+  !SUPABASE_PUBLISHABLE_KEY.includes('<') &&
+  SUPABASE_URL !== "https://placeholder.supabase.co";
 
 // Create a safe client that won't throw errors when not configured
 export const supabase = isSupabaseConfigured 
