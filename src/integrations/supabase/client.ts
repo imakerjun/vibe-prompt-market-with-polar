@@ -2,16 +2,29 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = "<SUPABASE_URL>";
-const SUPABASE_PUBLISHABLE_KEY = "<SUPABASE_PUBLISHABLE_KEY>";
+// Safe fallback values for when Supabase is not configured
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || "https://placeholder.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || "placeholder-key";
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-  auth: {
-    storage: localStorage,
-    persistSession: true,
-    autoRefreshToken: true,
-  }
-});
+// Check if Supabase is properly configured
+const isSupabaseConfigured = SUPABASE_URL !== "https://placeholder.supabase.co" && 
+                             SUPABASE_PUBLISHABLE_KEY !== "placeholder-key" &&
+                             !SUPABASE_URL.includes("<") && 
+                             !SUPABASE_PUBLISHABLE_KEY.includes("<");
+
+// Create a safe client that won't throw errors when not configured
+export const supabase = isSupabaseConfigured 
+  ? createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+      auth: {
+        storage: localStorage,
+        persistSession: true,
+        autoRefreshToken: true,
+      }
+    })
+  : null;
+
+// Helper to check if Supabase is available
+export const isSupabaseAvailable = () => !!supabase;

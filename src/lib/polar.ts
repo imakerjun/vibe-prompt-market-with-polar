@@ -1,14 +1,21 @@
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, isSupabaseAvailable } from '@/integrations/supabase/client';
 
 // Supabase Edge Function을 통해 안전하게 Polar Checkout 세션 생성
 export async function createPolarCheckout(productId: string): Promise<string> {
   try {
     const successUrl = `${window.location.origin}/success`;
     
+    // Supabase가 설정되지 않은 경우 바로 폴백 URL 반환
+    if (!isSupabaseAvailable()) {
+      console.log('Supabase not configured, using direct fallback URL');
+      const fallbackUrl = `https://buy.polar.sh/${productId}?success_url=${encodeURIComponent(successUrl)}`;
+      return fallbackUrl;
+    }
+    
     console.log('Calling Edge Function with:', { productId, successUrl });
     
     // Supabase Edge Function 호출
-    const { data, error } = await supabase.functions.invoke('polar-checkout', {
+    const { data, error } = await supabase!.functions.invoke('polar-checkout', {
       body: {
         productId,
         successUrl
